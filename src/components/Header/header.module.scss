@@ -1,1 +1,9 @@
-// TODO
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto;
+    padding-bottom: 4rem;
+    width: 90%;
+    max-width: 700px;
+}

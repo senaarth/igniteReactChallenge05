@@ -1,1 +1,44 @@
-// TODO
+.mainContainer {
+    height: 100%;
+    background-color: #1A1D23;
+    padding: 5rem 0;
+
+    * {
+        font-family: 'Inter', sans-serif;
+    }
+}
+
+.title {
+    color: #F8F8F8;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 2.125rem;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #D7D7D7;
+    font-size: 1.125rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+    margin-bottom: 1.5625rem;
+}
+
+.infoText {
+    color: #BBBBBB;
+    font-size: 0.875rem;
+    line-height: 1.0625rem;
+    font-weight: 400;
+    margin-left: 0.65625rem;
+    list-style: none;
+}
+
+.loadMore {
+    color: #FF57B2;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    cursor: pointer;
+    outline: none !important;
+}
