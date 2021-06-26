@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <div className={styles.headerContainer}>
       <Link href="/">
-        <img src="./logo.svg" alt="logo" style={{ cursor: "pointer" }} />
+        <img src="/logo.svg" alt="logo" style={{ cursor: "pointer" }} />
       </Link>
     </div>
   );
