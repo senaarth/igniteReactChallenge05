@@ -12,6 +12,7 @@ import Header from '../../components/Header';
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
 import { useRouter } from 'next/router';
+import { Comments } from '../../components/Comments';
 
 interface Post {
   first_publication_date: string | null;
@@ -251,6 +252,7 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
             )
           }
         </div>
+        <Comments />
       </div>
     </>
   );
