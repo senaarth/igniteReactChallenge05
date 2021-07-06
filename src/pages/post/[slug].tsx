@@ -253,6 +253,18 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
           }
         </div>
         <Comments />
+        {preview && (
+          <aside 
+            className={commonStyles.previewModeBtn}
+            style={{
+              marginTop: "3rem",
+            }}
+          >
+            <Link href="/api/exit-preview">
+              <a>Sair do modo Preview</a>
+            </Link>
+          </aside>
+        )}
       </div>
     </>
   );
