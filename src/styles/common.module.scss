@@ -6,6 +6,14 @@
     * {
         font-family: 'Inter', sans-serif;
     }
+
+    @media (max-width: 1023px) {
+        padding: 2rem 1.5rem;
+
+        img {
+            max-height: 9rem;
+        }
+    }
 }
 
 .title {
@@ -15,6 +23,10 @@
     line-height: 2.125rem;
     letter-spacing: -0.5px;
     margin-bottom: 0.5rem;
+
+    @media (max-width: 1023px) {
+        font-size: 1.25rem;
+    }
 }
 
 .subtitle {
@@ -23,6 +35,10 @@
     line-height: 1.375rem;
     font-weight: 400;
     margin-bottom: 1.5625rem;
+
+    @media (max-width: 1023px) {
+        font-size: 0.725rem;
+    }
 }
 
 .infoText {
@@ -41,6 +57,10 @@
     margin-top: 1rem;
     cursor: pointer;
     outline: none !important;
+
+    @media (max-width: 1023px) {
+        text-align: center;
+    }
 }
 
 .previewModeBtn {

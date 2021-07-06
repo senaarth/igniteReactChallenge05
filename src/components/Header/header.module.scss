@@ -6,4 +6,9 @@
     padding-bottom: 4rem;
     width: 90%;
     max-width: 700px;
+
+    @media (max-width: 1023px) {
+        justify-content: center;
+        padding-bottom: 2rem;
+    }
 }

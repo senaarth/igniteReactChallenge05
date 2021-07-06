@@ -87,7 +87,13 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
       <Head>
         <title>Posts | spacetraveling</title>
       </Head>
-      <div className={commonStyles.mainContainer}>
+      <div 
+        className={commonStyles.mainContainer}
+        style={{
+          paddingLeft: 0,
+          paddingRight: 0,
+        }}
+      >
         <Header />
         <img
           src={post.data.banner.url}
@@ -101,14 +107,7 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
         <div className={styles.postContainer}>
           <h1>{post.data.title}</h1>
           <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: '50%',
-              minWidth: '350px',
-              marginTop: '1.5625rem'
-            }}
+            className={styles.postInfoContainer}
           >
             <div
               style={{
@@ -162,24 +161,13 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
             )
           }
           <div
-            style={{
-              paddingTop: '3.525rem',
-              paddingBottom: '4.125rem',
-              width: '100%',
-            }}
+            className={styles.contentContainer}
           >
             {
               post.data.content.map((item) => {
                 return (
                   <div key={item.heading}>
-                    <h1
-                      style={{
-                        color: '#F8F8F8',
-                        fontSize: '2.4rem',
-                        marginBottom: '1.2rem',
-                        marginTop: '0.6rem',
-                      }}
-                    >
+                    <h1 className={styles.contentHeading}>
                       {item.heading}
                     </h1>
                     <div>
@@ -188,13 +176,6 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
                           return (
                             <p
                               key={item.text}
-                              style={{
-                                color: '#BBBBBB',
-                                fontSize: '1.125rem',
-                                lineHeight: '1.5rem',
-                                letterSpacing: '-0.5px',
-                                marginBottom: '0.6rem',
-                              }}
                             >
                               {item.text}
                             </p>

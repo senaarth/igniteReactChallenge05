@@ -102,13 +102,7 @@ export default function Home({ postsPagination, preview }: HomeProps) {
                   <h1 className={commonStyles.title}>{post.data.title}</h1>
                   <p className={commonStyles.subtitle}>{post.data.subtitle}</p>
                   <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      width: '35%',
-                    }}
+                    className={styles.postInfo}
                   >
                     <div
                       style={{
@@ -164,6 +158,7 @@ export default function Home({ postsPagination, preview }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
+  previewData,
 }) => {
   const prismic = getPrismicClient();
   const postsResponse = await prismic.query(
@@ -171,6 +166,7 @@ export const getStaticProps: GetStaticProps = async ({
     {
       pageSize: 1,
       orderings: '[document.last_publication_date desc]',
+      ref: previewData?.ref || null,
     }
   );
 

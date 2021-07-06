@@ -8,6 +8,43 @@
     .postContainer {
         margin-bottom: 3.125rem;
         text-decoration: none !important;
+
+        @media (max-width: 1023px) {
+            margin-bottom: 2rem;
+
+            h1 {
+                margin-bottom: 0;
+            }
+
+            & > p {
+                margin-bottom: 0.725rem;
+                line-height: 1.125rem;
+            }
+        }
+    }
+
+    .postInfo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 35%;
+
+        @media (max-width: 1023px) {
+            flex-direction: column;
+            width: 100%;
+            align-items: flex-start;
+
+            div + div {
+                margin-top: 0.425rem;
+            }
+        }
+    }
+
+
+
+    @media (max-width: 1023px) {
+        padding-bottom: 2rem;
     }
 }
 
