@@ -15,6 +15,7 @@ import { useRouter } from 'next/router';
 
 interface Post {
   first_publication_date: string | null;
+  last_publication_date: string | null;
   data: {
     title: string;
     banner: {
@@ -69,6 +70,16 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
       locale: ptBR,
     }
   );
+
+  const formatedLastPublicationDate = post.last_publication_date !== post.first_publication_date ? (
+    format(
+      new Date(post.last_publication_date),
+      "'* editado em ' dd MMM yyyy', às' H':'m",
+      {
+        locale: ptBR,
+      }
+    )
+  ) : null;
 
   return (
     <>
@@ -135,6 +146,20 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
               </p>
             </div>
           </div>
+          {
+            formatedLastPublicationDate && (
+              <p
+                style={{
+                  marginTop: "1.125rem",
+                  fontSize: "0.875rem",
+                  fontStyle: "italic",
+                  color: "#BBBBBB"
+                }}
+              >
+                {formatedLastPublicationDate}
+              </p>
+            )
+          }
           <div
             style={{
               paddingTop: '3.525rem',
@@ -275,9 +300,11 @@ export const getStaticProps = async ({
     }
   );
 
+
   const post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
