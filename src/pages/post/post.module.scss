@@ -1,6 +1,7 @@
 .postContainer {
     margin: 0 auto;
     padding: 5rem 0;
+    padding-bottom: 0;
     width: 90%;
     max-width: 700px;
 
@@ -8,5 +9,37 @@
         font-size: 3rem;
         color: #F8F8F8;
         line-height: 3.630625rem;
+    }
+}
+
+.navigationContainer {
+    border-top: 1px solid rgba(215, 215, 215, 0.1);
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .postNavContainer {
+        display: flex;
+        flex-direction: column;
+        padding-top: 3.0625rem;
+
+        h1 {
+            font-weight: 400;
+            color: #f8f8f8;
+            font-size: 1.125rem;
+            line-height: 1.375;
+            letter-spacing: -0.5px;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 1rem;
+            line-height: 1.1875rem;
+            color: #FF57B2;
+        }
     }
 }

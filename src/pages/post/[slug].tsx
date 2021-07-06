@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from "next/head";
+import Link from "next/link";
 
 import { getPrismicClient } from '../../services/prismic';
 import Prismic from '@prismicio/client';
@@ -31,9 +32,20 @@ interface Post {
 
 interface PostProps {
   post: Post;
+  postsNavigation: {
+    nextPost?: {
+      slug: string;
+      title: string;
+    };
+    prevPost?: {
+      slug: string;
+      title: string;
+    };
+  };
+  preview: boolean;
 }
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, postsNavigation, preview }: PostProps) {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -134,9 +146,9 @@ export default function Post({ post }: PostProps) {
               post.data.content.map((item) => {
                 return (
                   <div key={item.heading}>
-                    <h1 
-                      style={{ 
-                        color: '#F8F8F8', 
+                    <h1
+                      style={{
+                        color: '#F8F8F8',
                         fontSize: '2.4rem',
                         marginBottom: '1.2rem',
                         marginTop: '0.6rem',
@@ -170,6 +182,50 @@ export default function Post({ post }: PostProps) {
             }
           </div>
         </div>
+        <div className={styles.navigationContainer}>
+          {
+            postsNavigation.prevPost && (
+              <div
+                className={styles.postNavContainer}
+                style={{
+                  marginRight: "auto",
+                }}
+              >
+                <h1>{postsNavigation.prevPost.title}</h1>
+                <Link href={`/post/${postsNavigation.prevPost.slug}`}>
+                  <a>Post anterior</a>
+                </Link>
+              </div>
+            )
+          }
+          {
+            postsNavigation.nextPost && (
+              <div
+                className={styles.postNavContainer}
+                style={{
+                  marginLeft: "auto",
+                }}
+              >
+                <h1
+                  style={{
+                    textAlign: "right",
+                  }}
+                >
+                  {postsNavigation.nextPost.title}
+                </h1>
+                <Link href={`/post/${postsNavigation.nextPost.slug}`}>
+                  <a
+                    style={{
+                      marginLeft: "auto"
+                    }}
+                  >
+                    Próximo post
+                  </a>
+                </Link>
+              </div>
+            )
+          }
+        </div>
       </div>
     </>
   );
@@ -193,9 +249,31 @@ export const getStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({
+  params,
+  preview = false,
+  previewData,
+}) => {
   const prismic = getPrismicClient();
-  const response = await prismic.getByUID('posts', params.slug, { ref: null });
+  const response = await prismic.getByUID('posts', params.slug, { ref: previewData?.ref || null });
+
+  const prevPost = await prismic.query(
+    [Prismic.Predicates.at('document.type', 'posts')],
+    {
+      pageSize: 1,
+      after: response.id,
+      orderings: '[document.first_publication_date]',
+    }
+  );
+
+  const nextPost = await prismic.query(
+    [Prismic.Predicates.at('document.type', 'posts')],
+    {
+      pageSize: 1,
+      after: response.id,
+      orderings: '[document.last_publication_date desc]',
+    }
+  );
 
   const post = {
     uid: response.uid,
@@ -221,6 +299,17 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       post,
+      postsNavigation: {
+        prevPost: prevPost?.results[0] ? {
+          slug: prevPost?.results[0]?.uid,
+          title: prevPost?.results[0]?.data?.title,
+        } : null,
+        nextPost: nextPost?.results[0] ? {
+          slug: nextPost?.results[0]?.uid,
+          title: nextPost?.results[0]?.data?.title,
+        } : null,
+      },
+      preview,
     },
   }
 };
