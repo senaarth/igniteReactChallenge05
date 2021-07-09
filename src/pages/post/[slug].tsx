@@ -199,9 +199,11 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
                 }}
               >
                 <h1>{postsNavigation.prevPost.title}</h1>
-                <Link href={`/post/${postsNavigation.prevPost.slug}`}>
-                  <a>Post anterior</a>
-                </Link>
+                <a 
+                  href={`/post/${postsNavigation.prevPost.slug}`}
+                >
+                  Post anterior
+                </a>
               </div>
             )
           }
@@ -220,15 +222,14 @@ export default function Post({ post, postsNavigation, preview }: PostProps) {
                 >
                   {postsNavigation.nextPost.title}
                 </h1>
-                <Link href={`/post/${postsNavigation.nextPost.slug}`}>
-                  <a
-                    style={{
-                      marginLeft: "auto"
-                    }}
-                  >
-                    Próximo post
-                  </a>
-                </Link>
+                <a
+                  href={`/post/${postsNavigation.nextPost.slug}`}
+                  style={{
+                    marginLeft: "auto"
+                  }}
+                >
+                  Próximo post
+                </a>
               </div>
             )
           }
